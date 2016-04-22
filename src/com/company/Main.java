@@ -57,6 +57,6 @@ public class Main {
     }
 
     public void printStr(String s1, String s2, String s3) {
-        System.out.println(s1 + " " + s2 + " " + s3);
+        System.out.println(s1 + "/r/n" + s2 + "/r/n" + s3);
     }
 }
