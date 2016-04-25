@@ -1,14 +1,18 @@
 package it.source;
 
+import java.util.Arrays;
+
 public class Fibonacci {
     public static void main(String[] args) {
+        /*
+        Выведите на экран первые 11 членов последовательности Фибоначчи.
+        Напоминаем, что первый и второй члены последовательности равны единицам, а каждый следующий — сумме двух предыдущих.
+        **/
 
-        Fibonacci fibonacci = new Fibonacci();
-        fibonacci.print(fibonacci.getFibonacciSeries(11));
+        System.out.println(Arrays.deepToString(getFibonacciSeries(11)));
     }
-
-    public int[] getFibonacciSeries(int length) {
-        int[] array = new int[length];
+    public static Integer[] getFibonacciSeries(int length) {
+        Integer[] array = new Integer[length];
         array[0] = 1;
         array[1] = 1;
         for (int i = 2; i < array.length; i++) {
@@ -17,8 +21,4 @@ public class Fibonacci {
         return array;
     }
 
-    public void print(int[] array) {
-        for (int i = 0; i < array.length; i++)
-            System.out.print(array[i] + " ");
-    }
 }

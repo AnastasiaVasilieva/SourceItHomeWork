@@ -5,7 +5,10 @@ import java.util.Arrays;
 public class ArrayMax {
 
     public static void main(String[] args) {
-
+        /*
+         Напишите программу, печатающую количество максимальных элементов непустого массива,
+         в которой используется только один цикл.
+         */
         int[] array = {2, 3, 4, 1, 2, 3, 5, 6, 7, 4, 1, 9, 9, 9, 9};
         System.out.println("kolMax = " + kolMaxValue(array));
 

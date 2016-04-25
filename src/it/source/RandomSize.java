@@ -1,29 +1,28 @@
 package it.source;
 
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class RandomSize {
+    /*
+    *Создать двумерный массив из случайных чисел так
+    *чтобы размер внутреннего массива был случайным. Вывести массив на экран.
+    **/
     public static void main(String[] args) {
-        int[][] array = new int[5][(int) (Math.random() * 10)];
-        print(Random(array));
 
-    }
-    public static void print(int[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            int[] array1 = array[i];
-            for (int j = 0; j < array1.length; j++) {
-                System.out.print(array[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+        Random random = new Random();
+        int col = random.nextInt(10);
+        Integer[][] array = new Integer[6][col];
 
-    public static int[][] Random(int[][] array){
+
         for (int i = 0; i < array.length; i++) {
-            int[] array1 = array[i];
-            for (int j = 0; j < array1.length; j++) {
-                array[i][j] = (int) (Math.random() * 10);
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = random.nextInt(10);
             }
         }
-        return array;
+        System.out.println(Arrays.deepToString(array));
+
+
     }
 }

@@ -3,6 +3,9 @@ package it.source;
 public class Tickets {
 
     public static void main(String[] args) {
+        /*
+        *подсчитайте сколько счастливых билетов в одном рулоне
+        **/
         int[] array = new int[1000000];
         Tickets tickets = new Tickets();
 
