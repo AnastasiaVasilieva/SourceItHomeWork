@@ -36,7 +36,6 @@ public class ArrStrToInteg {
                 System.out.print(sum + " ");
             }
         }
-
     }
 
 }
