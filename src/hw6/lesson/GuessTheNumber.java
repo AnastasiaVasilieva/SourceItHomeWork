@@ -1,12 +1,8 @@
 package hw6.lesson;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Created by Nastya on 26.04.2016.
- */
 public class GuessTheNumber {
     /**
      * Загадываем число от 0 до 100. У вас есть семь попыток на угадывание.
