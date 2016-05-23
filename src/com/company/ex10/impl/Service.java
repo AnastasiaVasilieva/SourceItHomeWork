@@ -67,14 +67,15 @@ public class Service implements com.company.ex10.Service {
     @Override
     public String getOvercrowdedState(String name) {
         Double density = Double.MIN_VALUE;
-
+        String overcrowdedState = null;
         for (int i = 0; i < countries.length; i++) {
             if (countries[i].getName().equals(name)) {
                 for (int j = 0; j < countries[i].getStates().length; j++) {
                     if (density < countries[i].getStates()[j].getPopulation() / countries[i].getStates()[j].getSquare()) {
-                        return countries[i].getStates()[j].getName();
+                        overcrowdedState =  countries[i].getStates()[j].getName();
                     }
                 }
+            return overcrowdedState;
             }
         }
         return null;
@@ -83,13 +84,15 @@ public class Service implements com.company.ex10.Service {
     @Override
     public String getBiggestState(String name) {
         Double maxSq = Double.MIN_VALUE;
+        String biggestState = null;
         for (int i = 0; i < countries.length; i++) {
             if (countries[i].getName().equals(name)) {
                 for (int j = 0; j < countries[i].getStates().length; j++) {
                     if (maxSq < countries[i].getStates()[j].getSquare()) {
-                        return countries[i].getStates()[j].getName();
+                        biggestState =  countries[i].getStates()[j].getName();
                     }
                 }
+                return biggestState;
             }
         }
         return null;
