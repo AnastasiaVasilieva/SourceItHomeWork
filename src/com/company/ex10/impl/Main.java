@@ -22,17 +22,13 @@ public class Main {
 
         System.out.println(serv.getCountryPopulation("Ukraine"));
         System.out.println(serv.getCountryPopulation("Belarusia"));
-        System.out.println("pop");
         System.out.println(serv.getOvercrowdedCountry().getName());
         System.out.println(serv.getCountrySquare("Belarusia"));
         System.out.println(serv.getCountrySquare("Ukraine"));
-        System.out.println("sq");
         System.out.println(serv.getTotalDensityOfPeople("Ukraine"));
         System.out.println(serv.getTotalDensityOfPeople("Belarusia"));
-        System.out.println("total");
         System.out.println(serv.getAverageDensityOfPeopleByStates("Ukraine"));
         System.out.println(serv.getAverageDensityOfPeopleByStates("Belarusia"));
-        System.out.println("aver");
         System.out.println(serv.getOvercrowdedState("Belarusia"));
         System.out.println(serv.getOvercrowdedState("Ukraine"));
         System.out.println(serv.getBiggestState("Ukraine"));
