@@ -42,26 +42,26 @@ public class Service implements com.company.ex10.Service {
 
     @Override
     public Double getTotalDensityOfPeople(String name) {
-        Double TotalDensity =0.0;
+        Double totalDensity =0.0;
         for (Country country : countries) {
             if (country.getName().equals(name)) {
-                 TotalDensity+=country.getPopulation() / country.getSquare();
+                 totalDensity+=country.getPopulation() / country.getSquare();
             }
         }
-        return TotalDensity;
+        return totalDensity;
     }
 
     @Override
     public Double getAverageDensityOfPeopleByStates(String name) {
-        Double AverDest = 0.0;
+        Double averdest = 0.0;
         for (int i = 0; i < countries.length; i++) {
             if (countries[i].getName().equals(name)) {
                 for (int j = 0; j < countries[i].getStates().length; j++) {
-                    AverDest+=countries[i].getStates()[j].getPopulation()/countries[i].getStates()[j].getSquare();
+                    averdest+=countries[i].getStates()[j].getPopulation()/countries[i].getStates()[j].getSquare();
                 }
             }
         }
-        return AverDest;
+        return averdest;
     }
 
     @Override
