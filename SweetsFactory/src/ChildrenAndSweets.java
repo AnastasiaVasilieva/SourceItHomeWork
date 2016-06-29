@@ -8,13 +8,17 @@ class ChildrenIceCream extends Thread {
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
+                }
+            ChildrenAndSweets.Sweet sweet = ChildrenAndSweets.getSweet(ChildrenAndSweets.SweetType.ICECREAM);
+            if(sweet!=null)
+            System.out.println(sweet);
+            else{
+                System.out.println("wait for sweet");
+                i--;
             }
-
-            System.out.println(new ChildrenAndSweets().getSweet(ChildrenAndSweets.SweetType.ICECREAM));
-        }
+            }
     }
 }
-
 class ChildrenCake extends Thread {
     @Override
     public void run() {
@@ -23,62 +27,69 @@ class ChildrenCake extends Thread {
                 sleep(1000);
             } catch (InterruptedException e) {
             }
-
-            System.out.println(new ChildrenAndSweets().getSweet(ChildrenAndSweets.SweetType.CAKE));
+            ChildrenAndSweets.Sweet sweet = ChildrenAndSweets.getSweet(ChildrenAndSweets.SweetType.CAKE);
+            if(sweet!=null)
+            System.out.println(sweet);
+            else{
+                System.out.println("wait for sweet");
+                i--;
+            }
         }
     }
 }
-
-public class ChildrenAndSweets {
-    static ChildrenCake cake;
-    static ChildrenIceCream icecream;
-
-    public static Sweet getSweet(SweetType type) {
-        switch (type) {
-            case CANDY:
-                return new Candy("Candy", "cherry", "red");
-            case ICECREAM:
-                return new IceCream("Ice-cream", "banana", "yellow");
-            case CAKE:
-                return new Cake("Cake", "chocko", "brown");
+class ChildrenCandy extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+            }
+            ChildrenAndSweets.Sweet sweet = ChildrenAndSweets.getSweet(ChildrenAndSweets.SweetType.CANDY);
+            if(sweet!=null)
+                System.out.println(sweet);
+            else{
+                System.out.println("wait for sweet");
+                i--;
+            }
         }
+    }
+}
+public class ChildrenAndSweets {
+    private static volatile long lastTime;
+
+    public static synchronized Sweet getSweet(SweetType type) {
+        if(System.currentTimeMillis() - lastTime > 1000)
+        {
+            lastTime = System.currentTimeMillis();
+            switch (type) {
+                case CANDY:
+                    return new Candy("Candy", "cherry", "red");
+                case ICECREAM:
+                    return new IceCream("Ice-cream", "banana", "yellow");
+                case CAKE:
+                    return new Cake("Cake", "chocko", "brown");
+            }
+        }
+
         return null;
     }
+    public static void main(String[] args) throws InterruptedException {
 
-    public static void main(String[] args) {
-        cake = new ChildrenCake();
-        icecream = new ChildrenIceCream();
+        ChildrenCake cake = new ChildrenCake();
+        ChildrenIceCream icecream = new ChildrenIceCream();
+        ChildrenCandy candy = new ChildrenCandy();
         System.out.println("start asking sweets");
         cake.start();
         icecream.start();
-
-        for (int i = 0; i < 5; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-
-            System.out.println(new ChildrenAndSweets().getSweet(SweetType.CANDY));
-        }
-        if (icecream.isAlive())    //проверка завершения предыдущего потока
-        {
-            try {
-                icecream.join();    //Подождать пока закончит выпрашивать сладости.
-            } catch (InterruptedException e) {
-            }
-
-            System.out.println(new ChildrenAndSweets().getSweet(SweetType.ICECREAM));
-        } else    //если предыдущий поток завершился
-        {
-            System.out.println(new ChildrenAndSweets().getSweet(SweetType.CANDY));
-        }
-        System.out.println("Finish");
+        candy.start();
+        cake.join();
+        icecream.join();
+        candy.join();
     }
-
     enum SweetType {
         ICECREAM, CANDY, CAKE;
     }
-
     static class Sweet {
         public String taste;
         public String color;
@@ -95,21 +106,18 @@ public class ChildrenAndSweets {
             return name + "{" + "taste = " + taste + ", color = " + color + '}';
         }
     }
-
     static class Candy extends Sweet {
 
         public Candy(String name, String taste, String color) {
             super(name, taste, color);
         }
     }
-
     static class IceCream extends Sweet {
 
         public IceCream(String name, String taste, String color) {
             super(name, taste, color);
         }
     }
-
     static class Cake extends Sweet {
         public Cake(String name, String taste, String color) {
             super(name, taste, color);
