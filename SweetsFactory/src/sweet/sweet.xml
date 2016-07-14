@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sweets>
+ <child id="1">
+	  <sweet>
+		  <name> ice-cream  </name>
+		  <taste> banana</taste>
+		  <color> yellow </color>
+	  </sweet>
+  </child>
+  <child id="2">
+	  <sweet>
+		  <name> cake </name>
+		  <taste> choco </taste>
+		  <color> brown </color>
+	  </sweet>
+  </child>
+  <child id="3">
+	  <sweet>
+		  <name> candy  </name>
+		  <taste> cherry</taste>
+		  <color> red </color>
+	  </sweet>
+  </child>
+</sweets>
