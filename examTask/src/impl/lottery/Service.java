@@ -15,7 +15,7 @@ public class Service implements api.lottery.Service {
     Map<Long, Lottery> lotteries = new HashMap<>();
     List<api.lottery.Ticket> winningTickets;
     /**
-     * should create new lottery with certain type and put it into map.
+     * create new lottery with certain type and put it into map.
      * Also this method should create lottery tickets and put them into lottery.
      *
      * @param type

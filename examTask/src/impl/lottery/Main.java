@@ -21,6 +21,7 @@ public class Main {
         for(Ticket t : tickets) {
             if(service.takeMoney(lotteryNumber, t) != null) {
                 numberOfWins++;
+                System.out.println("Lottery[ticket№" + t.getNumber()+", money "+service.takeMoney(lotteryNumber,t)+"]");
             }
         }
         assert numberOfWins > 0;
