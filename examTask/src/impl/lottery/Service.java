@@ -18,7 +18,7 @@ public class Service implements api.lottery.Service {
      * create new lottery with certain type and put it into map.
      * Also this method should create lottery tickets and put them into lottery.
      *
-     * @param type
+     * @param type - type of lottery
      * @return number of ticket
      */
     @Override
@@ -35,13 +35,13 @@ public class Service implements api.lottery.Service {
                 return lotoLottery.getLotteryNumber();
             case INSTANT:
                 winningTickets = InstantLottery.winnigTickets();
-                InstantLottery instant = new InstantLottery();
-                instant.performLottery();
-                for (long i = 0; i < 1000000; i++) {
-                    instant.tickets.add(new Ticket(i));
-                }
-                lotteries.put(instant.getLotteryNumber(), instant);
-                return instant.getLotteryNumber();
+                InstantLottery instantLottery = new InstantLottery();
+                for (long i = 0; i < 1000000; i++)
+                    instantLottery.tickets.add(new Ticket(i));
+                lotteries.put(instantLottery.getLotteryNumber(), instantLottery);
+                instantLottery.performLottery();
+
+                return instantLottery.getLotteryNumber();
         }
         return null;
     }

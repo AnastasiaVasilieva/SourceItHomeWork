@@ -13,15 +13,16 @@ public class Main {
     public static void main(String[] args) {
         Service service = new impl.lottery.Service();
 
-        Long lotteryNumber = service.performNewLottery(Lottery.Type.LOTTO);
+        Long lotteryNumber = service.performNewLottery(Lottery.Type.INSTANT);
         List<Ticket> tickets = service.getLotteryTickets(lotteryNumber);
         assert tickets.size() > 0;
-        assert service.takeMoney(-1l, tickets.get(0)) == null;
+        assert service.takeMoney(-1L, tickets.get(0)) == null;
         int numberOfWins = 0;
-        for(Ticket t : tickets) {
-            if(service.takeMoney(lotteryNumber, t) != null) {
+        for (Ticket t : tickets) {
+            if (service.takeMoney(lotteryNumber, t) != null) {
                 numberOfWins++;
-                System.out.println("Lottery[ticket№" + t.getNumber()+", money "+service.takeMoney(lotteryNumber,t)+"]");
+                System.out.println("Lottery" + " [ticket№" + t.getNumber()
+                        + ", money " + service.takeMoney(lotteryNumber, t) + "]");
             }
         }
         assert numberOfWins > 0;

@@ -4,7 +4,6 @@ import api.lottery.Lottery;
 import api.lottery.Ticket;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,8 +12,6 @@ import java.util.Random;
  */
 public class InstantLottery implements Lottery {
 
-    private static List<Ticket> winningTickets = new LinkedList<>();
-    public Double money = 0d;
     /**
      * Тип - мгновенная
      * - номер лотереи
@@ -24,9 +21,10 @@ public class InstantLottery implements Lottery {
      * - выиграшные комбинации
      * - забрать выигрыш
      */
-    Random rand = new Random();
+    static List<Ticket> winningTickets = new ArrayList<>();
+    public Double money;
     List<Ticket> tickets = new ArrayList<>();
-    private int[][] winCombinations = new int[5][0];
+    Random rand = new Random();
     private Long lotteryNumber = rand.nextLong();
 
     public static List<Ticket> winnigTickets() {
@@ -44,33 +42,26 @@ public class InstantLottery implements Lottery {
     }
 
     @Override
-    public List<Ticket> getLotteryTickets() {
-        return tickets;
-    }
-
-    @Override
     public void performLottery() {
         getWinCombinations();
-        for (int i = 0; i < tickets.size(); i++) {
-            for (int j = 0; j < tickets.get(i).getCombination().length; j++) {
-                for (int k = 0; k < tickets.get(i).getCombination().length; k++) {
-                    for (int l = 0; l < getWinCombinations().length; l++) {
-                        if (tickets.get(i).getCombination()[j][k] == getWinCombinations()[l][0]) {
-                            money += 5d;
-                            winningTickets.add(tickets.get(i));
-                            takeMoney(tickets.get(i));
-                        }
-                    }
-                }
+        for (Ticket ticket : tickets) {
+            if (ticket.getCombination()[0][0] == getWinCombinations()[0][0] &&
+                    ticket.getCombination()[1][1] == getWinCombinations()[1][1] &&
+                    ticket.getCombination()[2][2] == getWinCombinations()[2][2] &&
+                    ticket.getCombination()[3][3] == getWinCombinations()[3][3]) {
+                money = 100d;
+                takeMoney(ticket);
+                winningTickets.add(ticket);
             }
         }
     }
 
     @Override
     public int[][] getWinCombinations() {
+        int[][] winCombinations = new int[4][4];
         for (int i = 0; i < winCombinations.length; i++) {
             for (int j = 0; j < winCombinations[i].length; j++) {
-                winCombinations[i][j] = rand.nextInt(10);
+                winCombinations[i][j] = rand.nextInt(40);
             }
         }
         return winCombinations;
@@ -80,4 +71,10 @@ public class InstantLottery implements Lottery {
     public Double takeMoney(Ticket ticket) {
         return money;
     }
+
+    @Override
+    public List<Ticket> getLotteryTickets() {
+        return tickets;
+    }
+
 }
